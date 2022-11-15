@@ -1,4 +1,4 @@
-package com.softuni.sodiumstock.api;
+package com.sodiumstock;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

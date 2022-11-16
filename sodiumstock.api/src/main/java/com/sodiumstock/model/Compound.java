@@ -13,7 +13,11 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "compounds")
+@Table(name = "compounds", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "casName"),
+        @UniqueConstraint(columnNames = "casNumber"),
+        @UniqueConstraint(columnNames = "molecularFormula")
+})
 public class Compound implements Serializable {
 
     @Id

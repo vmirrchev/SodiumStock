@@ -38,7 +38,11 @@ public class EmployeeController {
     private final JwtUtils jwtUtils;
 
 
-    public EmployeeController(EmployeeRepository employeeRepository, AuthenticationManager authenticationManager, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
+    public EmployeeController(EmployeeRepository employeeRepository,
+                              AuthenticationManager authenticationManager,
+                              RoleRepository roleRepository,
+                              PasswordEncoder encoder,
+                              JwtUtils jwtUtils) {
         this.employeeRepository = employeeRepository;
         this.authenticationManager = authenticationManager;
         this.roleRepository = roleRepository;
@@ -49,7 +53,8 @@ public class EmployeeController {
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                        loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
@@ -65,7 +70,7 @@ public class EmployeeController {
                 userDetails.getEmail(),
                 roles));
     }
-    @PostMapping("/auth/create")
+    @PostMapping("/auth/employee/create")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> registerUser(@Valid @RequestBody NewEmployeeRequest newEmployeeRequest) {
         if (employeeRepository.existsByUsername(newEmployeeRequest.getUsername())) {
@@ -116,7 +121,8 @@ public class EmployeeController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @GetMapping("/auth/getAll")
+    @GetMapping("/auth/employee/getAll")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }

@@ -2,13 +2,12 @@ package com.sodiumstock.controller;
 
 import com.sodiumstock.model.Role;
 import com.sodiumstock.repository.RoleRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth/role")
+@RequestMapping("/api")
 public class RoleController {
 
         private final RoleRepository roleRepository;
@@ -17,7 +16,8 @@ public class RoleController {
             this.roleRepository = roleRepository;
         }
 
-        @PostMapping
+        @PostMapping("/auth/role/create")
+        @PreAuthorize("hasRole('ADMIN')")
         public Role addNewRole(@RequestBody Role role) {
             return roleRepository.save(role);
         }

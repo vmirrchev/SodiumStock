@@ -51,12 +51,19 @@ public class Employee implements Serializable {
     private String password;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "role_name", referencedColumnName = "name")
-    private Role role;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private Set<Entry> entries;
+
+    public void setRoles(){this.roles=roles;}
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
 }

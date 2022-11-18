@@ -21,11 +21,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth/employee")
+@RequestMapping("/api")
 public class EmployeeController {
 
     private final EmployeeRepository employeeRepository;
@@ -42,7 +45,7 @@ public class EmployeeController {
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
     }
-    @PostMapping("/login")
+    @PostMapping("/all/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -52,20 +55,28 @@ public class EmployeeController {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        String role = String.valueOf(userDetails.getRole());
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                role));
+                roles));
     }
-    @PostMapping("/create")
+    @PostMapping("/auth/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> registerUser(@Valid @RequestBody NewEmployeeRequest newEmployeeRequest) {
         if (employeeRepository.existsByUsername(newEmployeeRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
+        }
+        if (employeeRepository.existsByEmail(newEmployeeRequest.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already taken!"));
         }
 
         // Create new user's account
@@ -73,28 +84,39 @@ public class EmployeeController {
                 newEmployeeRequest.getUsername(),
                 newEmployeeRequest.getFirstName(),
                 newEmployeeRequest.getLastName(),
-                newEmployeeRequest.getPhoneNumber(),
                 newEmployeeRequest.getEmail(),
+                newEmployeeRequest.getPhoneNumber(),
                 encoder.encode(newEmployeeRequest.getPassword()));
 
-        String role = newEmployeeRequest.getRole();
-        Role newRole = null;
+        Set<String> stringRoles = newEmployeeRequest.getRoles();
+        Set<Role> roles = new HashSet<>();
 
-        if (role == null || role.equals("user")) {
-            Role userRole = roleRepository.findByName(ERole.USER)
+        if (stringRoles == null) {
+            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            newRole = userRole;
-        } else if(role.equals("admin")){
-            Role adminRole = roleRepository.findByName(ERole.ADMIN)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            newRole = adminRole;
+            roles.add(userRole);
+        } else {
+            stringRoles.forEach(role -> {
+                switch (role) {
+                    case "admin":
+                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(adminRole);
+                        break;
+                    default:
+                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(userRole);
+                }
+            });
         }
-        employee.setRole(newRole);
+
+        employee.setRoles(roles);
         employeeRepository.save(employee);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/auth/getAll")
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }

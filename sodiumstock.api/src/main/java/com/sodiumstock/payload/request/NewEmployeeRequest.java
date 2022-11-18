@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Data
 public class NewEmployeeRequest {
@@ -18,13 +19,13 @@ public class NewEmployeeRequest {
     @NotNull
     private String lastName;
 
-    private String phoneNumber;
-
     @NotBlank
     @Email
     private String email;
 
-    private String role;
+    private String phoneNumber;
+
+    private Set<String> roles;
 
     @NotBlank
     private String password;

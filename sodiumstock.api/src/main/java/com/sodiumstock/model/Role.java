@@ -22,7 +22,7 @@ public class Role implements Serializable {
     @Enumerated(EnumType.STRING)
     private ERole name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-    private Set<Employee> employees;
+    public Role(ERole name) {
+        this.name = name;
+    }
 }

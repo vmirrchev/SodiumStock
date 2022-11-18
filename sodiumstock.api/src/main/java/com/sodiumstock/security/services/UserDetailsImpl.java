@@ -3,22 +3,20 @@ package com.sodiumstock.security.services;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sodiumstock.model.Employee;
 import com.sodiumstock.model.Role;
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
-    private Role role;
 
     private String username;
 
@@ -29,19 +27,25 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String password) {
+    public UserDetailsImpl(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.password = password;;
+        this.password = password;
+        this.authorities = authorities;
     }
 
     public static UserDetailsImpl build(Employee employee) {
+        List<GrantedAuthority> authorities = employee.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .collect(Collectors.toList());
+
         return new UserDetailsImpl(
                 employee.getId(),
                 employee.getUsername(),
                 employee.getEmail(),
-                employee.getPassword());
+                employee.getPassword(),
+                authorities);
     }
 
     @Override
@@ -65,10 +69,6 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return username;
-    }
-
-    public Role getRole() {
-        return role;
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/compound")
+@RequestMapping("/api/auth/compound")
 public class CompoundController {
 
     private final CompoundRepository compoundRepository;

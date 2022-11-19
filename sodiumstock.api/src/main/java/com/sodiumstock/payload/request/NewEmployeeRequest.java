@@ -1,6 +1,5 @@
 package com.sodiumstock.payload.request;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -13,10 +12,10 @@ public class NewEmployeeRequest {
     @NotBlank
     private String username;
 
-    @NotNull
+    @NotBlank
     private String firstName;
 
-    @NotNull
+    @NotBlank
     private String lastName;
 
     @NotBlank

@@ -6,6 +6,8 @@ import com.sodiumstock.model.Employee;
 import com.sodiumstock.model.Role;
 import com.sodiumstock.repository.EmployeeRepository;
 import com.sodiumstock.repository.RoleRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -17,22 +19,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class InitializeService {
 
-    private final Environment environment;
-    private final PasswordEncoder encoder;
-    private final EmployeeRepository employeeRepository;
-    private final RoleRepository roleRepository;
-
-    public InitializeService(Environment environment,
-                             PasswordEncoder encoder,
-                             EmployeeRepository employeeRepository,
-                             RoleRepository roleRepository) {
-        this.environment = environment;
-        this.encoder = encoder;
-        this.employeeRepository = employeeRepository;
-        this.roleRepository = roleRepository;
-    }
+    private Environment environment;
+    private PasswordEncoder encoder;
+    private EmployeeRepository employeeRepository;
+    private RoleRepository roleRepository;
 
     @EventListener(ApplicationReadyEvent.class)
     public void createMasterUser (){

@@ -11,11 +11,14 @@ import com.sodiumstock.repository.EmployeeRepository;
 import com.sodiumstock.repository.RoleRepository;
 import com.sodiumstock.security.jwt.JwtUtils;
 import com.sodiumstock.security.services.UserDetailsImpl;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -28,27 +31,16 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api")
 public class EmployeeController {
 
-    private final EmployeeRepository employeeRepository;
-    private final AuthenticationManager authenticationManager;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder encoder;
-    private final JwtUtils jwtUtils;
+    private EmployeeRepository employeeRepository;
+    private AuthenticationManager authenticationManager;
+    private RoleRepository roleRepository;
+    private PasswordEncoder encoder;
+    private JwtUtils jwtUtils;
 
-
-    public EmployeeController(EmployeeRepository employeeRepository,
-                              AuthenticationManager authenticationManager,
-                              RoleRepository roleRepository,
-                              PasswordEncoder encoder,
-                              JwtUtils jwtUtils) {
-        this.employeeRepository = employeeRepository;
-        this.authenticationManager = authenticationManager;
-        this.roleRepository = roleRepository;
-        this.encoder = encoder;
-        this.jwtUtils = jwtUtils;
-    }
     @PostMapping("/all/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -61,14 +53,15 @@ public class EmployeeController {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
+                .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
+        return ResponseEntity.ok(new JwtResponse(
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                roles));
+                roles,
+                jwt));
     }
     @PostMapping("/auth/employee/create")
     @PreAuthorize("hasRole('ADMIN')")
@@ -96,24 +89,15 @@ public class EmployeeController {
         Set<String> stringRoles = newEmployeeRequest.getRoles();
         Set<Role> roles = new HashSet<>();
 
-        if (stringRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+        if(stringRoles == null){
+                Role adminRole = roleRepository.findByName(ERole.ROLE_USER)
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                roles.add(adminRole);
+
+        } else if(stringRoles.contains("admin")) {
+            Role userRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
-        } else {
-            stringRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
         }
 
         employee.setRoles(roles);

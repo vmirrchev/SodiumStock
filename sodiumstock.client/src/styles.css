@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
     --clr-main: #EFF7F6;
     --clr-spanish-gray:#8C9595;
@@ -14,8 +16,12 @@ html {
     width: 100%;
 }
 body {
-    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--clr-main);
+    color: var(--clr-logo-blue);
     padding: 0px;
+    margin: 0px;
     height: inherit;
     width: inherit;
+    max-width: 1920px;
 }

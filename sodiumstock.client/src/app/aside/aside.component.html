@@ -1,0 +1,11 @@
+<aside>
+    <nav class="side__navigation">
+      <ul>
+        <li><a routerLink="/home">Current Stock</a><span></span></li>
+        <li><a routerLink="/management">Manage Inventory</a><span></span></li>
+        <li><a routerLink="/statistics">Statistics</a><span></span></li>
+        <li><a routerLink="/info">Chemical Information</a><span></span></li>
+        <li *ngIf="isAdmin()"><a routerLink="/employeeManagement">Manage Employees</a><span></span></li>
+      </ul>
+    </nav>
+  </aside>

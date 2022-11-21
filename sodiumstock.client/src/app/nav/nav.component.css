@@ -1,0 +1,41 @@
+header {
+    -webkit-box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.75);
+    box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;;
+}
+header a {
+    text-decoration: none;
+    color: inherit;
+}
+header li {
+    list-style: none;
+}
+header img {
+    width: 400px;
+}
+header .header__container ul{
+    display: flex;
+    gap: 30px;
+    margin-right: 3rem;
+}
+header .header__container li.header__help img{
+    width: 30px;
+}
+header .header__container li.header__contact,
+header .header__container li.header__logout,
+header .header__container li.header__username  {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+header .header__container li.header__username {
+    text-transform: uppercase;
+}
+header .header__container li  a {
+    color: var(--clr-logo-blue);
+    font-weight: 600;
+}

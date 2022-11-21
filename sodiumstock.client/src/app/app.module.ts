@@ -16,6 +16,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { InfoComponent } from './info/info.component';
 import { ManagementComponent } from './management/management.component';
 import { ContentComponent } from './content/content.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ContentComponent } from './content/content.component';
     StatisticsComponent,
     InfoComponent,
     ManagementComponent,
-    ContentComponent
+    ContentComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,

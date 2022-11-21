@@ -1,42 +1,40 @@
 <div class="compound__info">
-    <select name="compound-select" id="select">
-        <option value="" disabled selected>SELECT COMPOUND</option>
-        <option value="">Aspirin</option>
-        <option value="">Hydrochloric acid</option>
-        <option value="">Acetone</option>
+    <select name="compound-select" id="select" [(ngModel)]="selectedCompound"> 
+        <option [selected]="true" [ngValue]="selectedCompound" disabled>SELECT COMPOUND</option>
+        <option *ngFor="let compound of compounds" [ngValue]="compound">{{ compound.casName }}</option>
     </select>
-    <div class="info__container">
+    <div class="info__container" *ngIf="selectedCompound">
         <img class="info__image"
             src="https://d1whtlypfis84e.cloudfront.net/guides/wp-content/uploads/2020/01/13131932/15.png"
             alt="test-img">
         <div class="info__details">
             <div class="details__property">
                 <p class="property__name">CAS-NAME</p>
-                <p class="property__value">Aspirin</p>
+                <p class="property__value">{{ selectedCompound.casName }}</p>
             </div>
             <div class="details__property">
                 <p class="property__name">CAS-NUMBER</p>
-                <p class="property__value">50-78-2</p>
+                <p class="property__value">{{ selectedCompound.casNumber }}</p>
             </div>
             <div class="details__property">
                 <p class="property__name">MOLECULAR-FORMULA</p>
-                <p class="property__value">C9H8O4</p>
+                <p class="property__value">{{ selectedCompound.molecularFormula }}</p>
             </div>
             <div class="details__property">
                 <p class="property__name">MOLAR-MASS</p>
-                <p class="property__value">180.16</p>
+                <p class="property__value">{{ selectedCompound.molarMass }}</p>
             </div>
             <div class="details__property">
                 <p class="property__name">BOILING-POINT</p>
-                <p class="property__value">197-200 °C</p>
+                <p class="property__value">{{ selectedCompound.boilingPoint }} °C</p>
             </div>
             <div class="details__property">
                 <p class="property__name">MELTING-POINT</p>
-                <p class="property__value">135 °C</p>
+                <p class="property__value">{{ selectedCompound.meltingPoint }} °C</p>
             </div>
             <div class="details__property">
                 <p class="property__name">DENSITY</p>
-                <p class="property__value">1.40 g/cm3</p>
+                <p class="property__value">{{ selectedCompound.density }} g/cm3</p>
             </div>
         </div>
     </div>

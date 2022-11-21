@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompoundService } from '../compound.service';
 
 @Component({
   selector: 'app-info',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit {
+  compounds: any;
+  selectedCompound: any;
 
-  constructor() { }
+  constructor(private componentService: CompoundService) { }
 
   ngOnInit(): void {
+    this.getCompounds();
   }
-
+  getCompounds() {
+    this.componentService.getAll()
+    .subscribe({
+      next: res => {
+      this.compounds = res;
+      },
+      error: () => alert("Error fetching compounds")
+      })
+  }
 }

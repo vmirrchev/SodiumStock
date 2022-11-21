@@ -14,8 +14,14 @@
 .table td {
     color: var(--clr-logo-blue);
 }
-.inventory__container .status {
-    color: red;
+.inventory__container .status__expired {
+    color: #F63E02;
+}
+.inventory__container .status__valid {
+    color: #63AC4A;
+}
+.inventory__container .status__expiring {
+    color: #E57C04;
 }
 .table thead {
     position: sticky;

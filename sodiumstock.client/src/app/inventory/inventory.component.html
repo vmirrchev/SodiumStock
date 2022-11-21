@@ -10,12 +10,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
-                <td>1,001</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td class="status">text</td>
+            <tr *ngFor="let entry of entries">
+                <td>{{ entry.compound.casName }}</td>
+                <td>{{ entry.compound.casNumber }}</td>
+                <td>{{ entry.employee.firstName + " " + entry.employee.lastName}}</td>
+                <td>{{ entry.expirationDate }}</td>
+                <td *ngIf="checkStatus(entry.expirationDate) == 'VALID'" class="status__valid">{{
+                    checkStatus(entry.expirationDate) }}</td>
+                <td *ngIf="checkStatus(entry.expirationDate) == 'EXPIRED'" class="status__expired">{{
+                    checkStatus(entry.expirationDate) }}</td>
+                <td *ngIf="checkStatus(entry.expirationDate) == 'EXPIRING'" class="status__expiring">{{
+                    checkStatus(entry.expirationDate) }}</td>
             </tr>
         </tbody>
     </table>

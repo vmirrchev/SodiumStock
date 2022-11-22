@@ -9,32 +9,36 @@
             alt="test-img">
         <div class="info__details">
             <div class="details__property">
-                <p class="property__name">CAS-NAME</p>
+                <p class="property__name">CAS-NAME:</p>
                 <p class="property__value">{{ selectedCompound.casName }}</p>
             </div>
             <div class="details__property">
-                <p class="property__name">CAS-NUMBER</p>
+                <p class="property__name">CAS-NUMBER:</p>
                 <p class="property__value">{{ selectedCompound.casNumber }}</p>
             </div>
             <div class="details__property">
-                <p class="property__name">MOLECULAR-FORMULA</p>
+                <p class="property__name">MOLECULAR-FORMULA:</p>
                 <p class="property__value">{{ selectedCompound.molecularFormula }}</p>
             </div>
             <div class="details__property">
-                <p class="property__name">MOLAR-MASS</p>
+                <p class="property__name">MOLAR-MASS:</p>
                 <p class="property__value">{{ selectedCompound.molarMass }}</p>
             </div>
             <div class="details__property">
-                <p class="property__name">BOILING-POINT</p>
+                <p class="property__name">BOILING-POINT:</p>
                 <p class="property__value">{{ selectedCompound.boilingPoint }} °C</p>
             </div>
             <div class="details__property">
-                <p class="property__name">MELTING-POINT</p>
+                <p class="property__name">MELTING-POINT:</p>
                 <p class="property__value">{{ selectedCompound.meltingPoint }} °C</p>
             </div>
             <div class="details__property">
-                <p class="property__name">DENSITY</p>
+                <p class="property__name">DENSITY:</p>
                 <p class="property__value">{{ selectedCompound.density }} g/cm3</p>
+            </div>
+            <div class="details__property" *ngFor="let otherName of selectedCompound.otherNames">
+                <p class="property__name">OTHER NAME:</p>
+                <p class="property__value">{{ otherName }}</p>
             </div>
         </div>
     </div>

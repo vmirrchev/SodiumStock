@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EntryService } from '../entry.service';
+import { Entry } from '../entry';
 
 @Component({
   selector: 'app-inventory',
@@ -7,21 +8,17 @@ import { EntryService } from '../entry.service';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-  entries: any;
+  public entries: Entry[] = [];
 
   constructor(private entryService: EntryService) { }
 
   ngOnInit(): void {
     this.getEntries();
+    console.log(this.entries);
   }
   getEntries() {
     this.entryService.getAll()
-    .subscribe({
-      next: res => {
-      this.entries = res;
-      },
-      error: () => alert("Error fetching entries")
-      })
+    .subscribe(data => this.entries = data)
   }
   checkStatus(date: string): string {
     let dateToCheck = new Date(date)

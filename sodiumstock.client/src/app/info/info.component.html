@@ -5,7 +5,7 @@
     </select>
     <div class="info__container" *ngIf="selectedCompound">
         <img class="info__image"
-            src="https://d1whtlypfis84e.cloudfront.net/guides/wp-content/uploads/2020/01/13131932/15.png"
+            src="{{ selectedCompound.imageUrl }}"
             alt="test-img">
         <div class="info__details">
             <div class="details__property">

@@ -41,7 +41,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [InventoryComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

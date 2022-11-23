@@ -29,23 +29,26 @@ public class InitializeService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void createMasterUser (){
-        roleRepository.save(new Role(ERole.ROLE_ADMIN));
+        if(!roleRepository.existsByName(ERole.ROLE_ADMIN)) {
+            roleRepository.save(new Role(ERole.ROLE_ADMIN));
+        }
+        if(!employeeRepository.existsByUsername("admin")) {
+            Employee employee = new Employee(
+                    environment.getProperty("masterUsername"),
+                    "Vasil",
+                    "Mirchev",
+                    "sodiumstock@admin.com",
+                    "0883551909",
+                    encoder.encode(environment.getProperty("masterPassword")));
 
-        Employee employee = new Employee(
-                environment.getProperty("masterUsername"),
-                "Vasil",
-                "Mirchev",
-                "sodiumstock@admin.com",
-                "0883551909",
-                encoder.encode(environment.getProperty("masterPassword")));
+            Set<Role> roles = new HashSet<>();
+            Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 
-        Set<Role> roles = new HashSet<>();
-        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            roles.add(adminRole);
+            employee.setRoles(roles);
 
-        roles.add(adminRole);
-        employee.setRoles(roles);
-
-        employeeRepository.save(employee);
+            employeeRepository.save(employee);
+        }
     }
 }

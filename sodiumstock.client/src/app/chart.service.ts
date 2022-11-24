@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { InventoryComponent } from './inventory/inventory.component';
 import { Entry } from './entry';
 import { Chart } from 'chart.js/auto';
+import { EntryService } from './entry.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChartService {
 
-  constructor(private inventoryComponent : InventoryComponent) { }
+  constructor(private entryService : EntryService) { }
 
   mapStatus(data: Entry[]): Map<string, number> {
     let map = new Map();
@@ -17,7 +17,7 @@ export class ChartService {
     let validCompounds: number = 0;
 
     data.forEach(entry => {
-      switch (this.inventoryComponent.checkStatus(entry.expirationDate)) {
+      switch (this.entryService.checkStatus(entry.expirationDate)) {
         case "VALID": validCompounds += 1;
           break;
         case "EXPIRING": expiringCompounds += 1;

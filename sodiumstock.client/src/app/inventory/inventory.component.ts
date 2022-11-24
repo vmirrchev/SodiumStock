@@ -9,28 +9,22 @@ import { Entry } from '../entry';
 })
 export class InventoryComponent implements OnInit {
   public entries: Entry[] = [];
+  public tableVisibility: string = 'hidden';
+  public messageVisibility: string = 'hidden';
 
-  constructor(private entryService: EntryService) { }
+  constructor(public entryService: EntryService) { }
 
   ngOnInit(): void {
-    this.getEntries();
-    console.log(this.entries);
-  }
-  getEntries() {
-    this.entryService.getAll()
-    .subscribe(data => this.entries = data)
-  }
-  checkStatus(date: string): string {
-    let dateToCheck = new Date(date)
-    let today = new Date();
-    let endDate = new Date();
-    endDate.setDate(endDate.getDate() + 7);
-    if(dateToCheck < today){
-      return "EXPIRED";
-    } else if (dateToCheck > endDate) {
-      return "VALID";
-    } else {
-      return "EXPIRING";
-    }
+    this.entryService.getAll().subscribe({
+      next: (data: Entry[]) => {
+        if(data.length > 0) {
+          this.entries = data;
+          this.tableVisibility = 'visible';
+        } else {
+          this.messageVisibility = 'visible';
+        }
+      },
+      error: (error: any) => alert("Error fetching data: " + error)
+    })
   }
 }

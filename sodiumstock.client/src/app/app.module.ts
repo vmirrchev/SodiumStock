@@ -17,6 +17,10 @@ import { InfoComponent } from './info/info.component';
 import { ManagementComponent } from './management/management.component';
 import { ContentComponent } from './content/content.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,14 +36,18 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     InfoComponent,
     ManagementComponent,
     ContentComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    EmployeesComponent,
+    EmployeeDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

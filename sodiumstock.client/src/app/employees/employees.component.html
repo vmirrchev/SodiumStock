@@ -1,0 +1,32 @@
+<div class="employees__container">
+    <button mat-button color="primary"(click)="openDialog()">ADD EMPLOYEE</button>
+    <table class="table table-striped table-sm">
+        <thead class="table__header">
+            <tr>
+                <th scope="col">USERNAME</th>
+                <th scope="col">FIRST NAME</th>
+                <th scope="col">LAST NAME</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">PHONE NUMBER</th>
+                <th scope="col">PASSWORD</th>
+                <th scope="col">ROLE</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+                <td>{{ employee.username }}</td>
+                <td>{{ employee.firstName }}</td>
+                <td>{{ employee.lastName }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.phoneNumber }}</td>
+                <td>*****</td>
+                <td>{{ employee.roles[0].name.substring(5) }}</td>
+                <td *ngIf="employee.roles[0].name.substring(5) != 'ADMIN'; else admin">
+                    <button class="btn__remove" (click)="removeEmployee(employee.id)">REMOVE</button>
+                </td>
+                <ng-template #admin><td></td></ng-template>
+            </tr>
+        </tbody>
+    </table>
+</div>

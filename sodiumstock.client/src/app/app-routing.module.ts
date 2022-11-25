@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'management', component: HomeComponent, canActivate: [HomeGuard]},
   { path: 'statistics', component: HomeComponent, canActivate: [HomeGuard]},
   { path: 'info', component: HomeComponent, canActivate: [HomeGuard]},
+  { path: 'employees', component: HomeComponent, canActivate: [HomeGuard]},
   //Will handle all bad url requiests
   { path: '**', pathMatch: 'full', 
         component: PagenotfoundComponent },

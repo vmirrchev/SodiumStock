@@ -1,0 +1,44 @@
+:host {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.inventory__container {
+    height: 100%;
+    overflow: auto;
+    position: relative;
+}
+.table {
+    position: relative;
+}
+.table td {
+    color: var(--clr-logo-blue);
+}
+.inventory__container .status__expired {
+    color: #F63E02;
+}
+.inventory__container .status__valid {
+    color: #63AC4A;
+}
+.inventory__container .status__expiring {
+    color: #E57C04;
+}
+.table thead {
+    position: sticky;
+    top: 0px;
+    background-color: var(--clr-main);
+}
+.btn__remove {
+    background: inherit;
+    border: none;
+    color: red;
+    border-radius: 5px;
+}
+.btn__add {
+    background: inherit;
+    border: none;
+    color: green;
+    border-radius: 5px;
+    width: 100%;
+}

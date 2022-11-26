@@ -39,5 +39,12 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build the Docker image
-      run: docker build . --file sodiumstock.api/Dockerfile --tag java-docker
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: sodiumstock
+      run: |
+        # Build a docker container and push it to ECR 
+        docker build . --file sodiumstock.api/Dockerfile --tag java-docker
+        echo "Pushing image to ECR..."
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
     

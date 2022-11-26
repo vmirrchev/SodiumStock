@@ -28,5 +28,5 @@ jobs:
       run: mvn -B package --file sodiumstock.api/pom.xml
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag java-docker
+      run: docker build . --file sodiumstock.api/Dockerfile --tag java-docker
     

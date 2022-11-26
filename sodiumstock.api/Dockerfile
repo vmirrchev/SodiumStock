@@ -1,3 +1,3 @@
 FROM openjdk:17
-COPY target/sodiumstock.api-0.0.1-SNAPSHOT.jar app.jar
+COPY sodiumstock.api/target/sodiumstock.api-0.0.1-SNAPSHOT.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

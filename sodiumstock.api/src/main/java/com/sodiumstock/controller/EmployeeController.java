@@ -110,4 +110,13 @@ public class EmployeeController {
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
+
+    @DeleteMapping("/auth/employee/delete")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<MessageResponse> deleteEmployee(@RequestParam Long id) {
+        employeeRepository.deleteById(id);
+        return ResponseEntity
+                .ok()
+                .body(new MessageResponse("User deleted successfully!"));
+    }
 }

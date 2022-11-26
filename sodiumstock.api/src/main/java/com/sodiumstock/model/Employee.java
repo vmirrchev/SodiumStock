@@ -1,6 +1,7 @@
 package com.sodiumstock.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,10 +48,10 @@ public class Employee implements Serializable {
 
     private String phoneNumber;
 
+    @JsonIgnore
     @NotNull
     private String password;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

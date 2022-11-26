@@ -33,12 +33,9 @@
     background: inherit;
     border: none;
     color: red;
-    border-radius: 5px;
 }
-.btn__add {
-    background: inherit;
+.btn.btn__add {
+    background: var(--clr-logo-blue);
     border: none;
-    color: green;
-    border-radius: 5px;
-    width: 100%;
+    color: white;
 }

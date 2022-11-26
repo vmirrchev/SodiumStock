@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Employee, EmployeeResponse } from '../employee';
 import { EmployeeService } from '../employee.service';
 import { MessageResponse } from '../messageResponse';
-import { MatDialog } from '@angular/material/dialog';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employees',
@@ -36,8 +36,9 @@ export class EmployeesComponent implements OnInit {
   }
   openDialog(){
     this.dialog.open(EmployeeDialogComponent, {
-      height: '400px',
-      width: '600px',
-    });
+      width: '450px',
+    }).
+    afterClosed().
+    subscribe(() => this.getEmployees())
   }
 }

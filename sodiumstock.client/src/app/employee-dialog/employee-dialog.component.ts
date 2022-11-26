@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { EmployeeService } from '../employee.service';
 import { MessageResponse } from '../messageResponse';
 
@@ -11,9 +12,10 @@ import { MessageResponse } from '../messageResponse';
 })
 export class EmployeeDialogComponent implements OnInit {
   form!: FormGroup;
+
   constructor(
     private employeeService: EmployeeService,
-    private formBuilder : FormBuilder,
+    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<EmployeeDialogComponent>
   ) { }
 
@@ -30,10 +32,9 @@ export class EmployeeDialogComponent implements OnInit {
   }
   submit(): void {
     this.employeeService.createEmployee(this.form.getRawValue())
-    .subscribe({
-      next: (messageResponse: MessageResponse) => {console.log(messageResponse.message)},
-      error: (error: any) => {alert("Error creating employee: " + error)}
-    })
+      .subscribe({
+        next: () => { this.dialogRef.close('Employee created successfully') },
+        error: (error: any) => { alert("Error creating employee: " + error) }
+      })
   }
-
 }

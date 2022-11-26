@@ -1,15 +1,27 @@
+<div class="dialog__container">
+    <p class="dialog__title">ADD NEW EMPLOYEE</p>
+    <form [formGroup]="form" class="dialog__form" (submit)="submit()">
+        <input formControlName="username" name="username" type="text" class="form-control" placeholder="Username">
 
-<p>Mat dialog works!</p>
-<!-- <input matInput formControlName="username" name ="username" type="text" class="form-control" placeholder="Username"> -->
+        <input formControlName="firstName" name="firstName" type="text" class="form-control" placeholder="First name">
 
-<!-- <input matInput formControlName="firstName" name ="firstName" type="text" class="form-control" placeholder="First name">
+        <input formControlName="lastName" name="lastName" type="text" class="form-control" placeholder="Last name">
 
-<input matInput formControlName="lastName" name ="lastName" type="text" class="form-control" placeholder="Last name">
+        <input formControlName="email" name="email" type="text" class="form-control" placeholder="Email">
 
-<input matInput formControlName="email" name ="email" type="text" class="form-control" placeholder="Email">
+        <input formControlName="phoneNumber" name="phoneNumber" type="text" class="form-control"
+            placeholder="Phone number">
 
-<input matInput formControlName="phoneNumber" name ="phoneNumber" type="text" class="form-control" placeholder="Phone number">
+        <input formControlName="password" name="password" type="text" class="form-control" placeholder="Password">
 
-<input matInput formControlName="password" name ="password" type="text" class="form-control" placeholder="Password">
-
-<input formControlName="role" name ="role" type="text" class="form-control" placeholder="Role"> -->
+        <select formControlName="role" name="role" class="form-control">
+            <option [disabled]="true" [selected]="true">SELECT ROLE</option>
+            <option value="user">USER</option>
+            <option value="admin">ADMIN</option>
+        </select>
+        <div class="btn__container">
+            <button [disabled]="form.invalid" class="btn btn-lg btn-primary" type="submit">SUBMIT</button>
+            <button class="btn btn-lg btn-primary" mat-dialog-close>CLOSE</button>
+        </div>
+    </form>
+</div>

@@ -46,5 +46,5 @@ jobs:
         # Build a docker container and push it to ECR 
         docker build . --file sodiumstock.api/Dockerfile --tag java-docker
         echo "Pushing image to ECR..."
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:java-docker
     

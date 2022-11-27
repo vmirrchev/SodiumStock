@@ -3,7 +3,7 @@
   height: 100%;
   object-fit: cover;
   position: absolute;
-  opacity: 0.05;
+  opacity: 0.07;
   z-index: -2;
 }
 .form-signin {
@@ -29,4 +29,8 @@
   .form-signin input[type="password"] {
     margin-bottom: 20px;
     border-radius: 5px;
+  }
+  .form-signin button {
+    background-color: var(--clr-logo-blue);
+    border: none;
   }

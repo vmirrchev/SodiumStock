@@ -13,7 +13,7 @@ export class EntryService {
   private apiUrl: string = environment.apiURL;
   private _getEntriesUrl: string = this.apiUrl + '/api/auth/entry/getAll';
   private _createEntriesUrl: string = this.apiUrl + '/api/auth/entry/create';
-  private _deleteEmployeeByUsernameUrl: string = this.apiUrl + '/api/auth/entry/delete?id=';
+  private _deleteEntryUrl: string = this.apiUrl + '/api/auth/entry/delete?id=';
 
   constructor(private http: HttpClient) { }
 
@@ -40,6 +40,6 @@ export class EntryService {
     return this.http.post<MessageResponse>(this._createEntriesUrl, entryRequest, { withCredentials: true, 'headers': this.headers });
   }
   removeById(id: Number): Observable<MessageResponse> {
-      return this.http.delete<MessageResponse>(this._deleteEmployeeByUsernameUrl + id, { withCredentials: true, 'headers': this.headers });
+      return this.http.delete<MessageResponse>(this._deleteEntryUrl + id, { withCredentials: true, 'headers': this.headers });
     }
 }

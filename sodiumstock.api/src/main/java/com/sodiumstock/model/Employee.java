@@ -59,7 +59,7 @@ public class Employee implements Serializable {
     private Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee")
     private Set<Entry> entries;
 
     public void setRoles(){this.roles=roles;}

@@ -22,12 +22,12 @@ public class Entry implements Serializable {
     private long id;
 
     @NotNull
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
     @NotNull
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "compound_id", referencedColumnName = "id")
     private Compound compound;
 

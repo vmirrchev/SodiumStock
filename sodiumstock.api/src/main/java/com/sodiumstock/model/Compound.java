@@ -52,6 +52,6 @@ public class Compound implements Serializable {
     private String imageUrl;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "compound", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "compound")
     private Set<Entry> entries;
 }

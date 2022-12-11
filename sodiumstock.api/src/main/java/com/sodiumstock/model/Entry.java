@@ -36,4 +36,11 @@ public class Entry implements Serializable {
 
     @NotNull
     private Date expirationDate;
+
+    public Entry(Employee employee, Compound compound, Date entryDate, Date expirationDate) {
+        this.employee = employee;
+        this.compound = compound;
+        this.entryDate = entryDate;
+        this.expirationDate = expirationDate;
+    }
 }

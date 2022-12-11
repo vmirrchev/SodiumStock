@@ -4,11 +4,10 @@
 
 :root {
     --clr-main: #EFF7F6;
-    --clr-spanish-gray:#8C9595;
-    --clr-battleship-gray:#808A8A;
-    --clr-celeste:#B2F7EF;
+    --clr-green: #63ac4a;
+    --clr-red: #f63e02;
+    --clr-orange: #e57c04;
     --clr-white:#FFF;
-    --clr-middle-blue:#92D1DD;
     --clr-logo-blue:#34495e;
     --clr-logo-green:#aacfd0;
 }

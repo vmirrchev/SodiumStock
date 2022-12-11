@@ -1,0 +1,31 @@
+.dialog__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    gap: 10px;
+}
+.dialog__title{
+    padding: 30px 30px;
+    font-weight: bold;
+    color: var(--clr-white);
+    background-color: var(--clr-logo-blue);
+    margin: 0;
+}
+.dialog__form {
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.btn__container {
+    gap: 10px;
+    padding: 30px 0px;
+    display: flex;
+}
+.btn__container button {
+    background-color: var(--clr-logo-blue);
+    border: none;
+    font-size: 1rem;
+}
+

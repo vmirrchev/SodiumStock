@@ -14,13 +14,13 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { MainComponent } from './main/main.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { InfoComponent } from './info/info.component';
-import { ManagementComponent } from './management/management.component';
 import { ContentComponent } from './content/content.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EntryDialogComponent } from './entry-dialog/entry-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +34,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MainComponent,
     StatisticsComponent,
     InfoComponent,
-    ManagementComponent,
     ContentComponent,
     PagenotfoundComponent,
     EmployeesComponent,
-    EmployeeDialogComponent
+    EmployeeDialogComponent,
+    EntryDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -21,18 +21,22 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {
     this.getEmployees();
   }
+  getEmployees(): void {
+    this.employeeService.getAll().subscribe({
+      next: (data: Employee[]) => {
+        if(data.length > 0) {
+          this.employees = data;
+        }
+      },
+      error: (error: any) => alert("Error fetching data: " + error)
+    })
+  }
   removeEmployee(id: number): void {
-    this.employeeService.removeByUsername(id)
+    this.employeeService.removeById(id)
       .subscribe({
         next: (message: MessageResponse) => { this.getEmployees() },
         error: (error: any) => { alert("Error deleting employee: " + error.message) }
       })
-  }
-  getEmployees(): void {
-    this.employeeService.getAll().subscribe({
-      next: (employees: Employee[]) => { this.employees = employees },
-      error: (error: any) => { alert("Error fetching employees: " + error.message) }
-    })
   }
   openDialog(){
     this.dialog.open(EmployeeDialogComponent, {

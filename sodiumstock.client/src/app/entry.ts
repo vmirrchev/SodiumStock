@@ -23,3 +23,9 @@ export interface Entry {
         "entryDate": string,
         "expirationDate": string
 }
+export interface EntryRequest {
+        "employeeId": number,
+        "compoundId": number,
+        "entryDate": string,
+        "expirationDate": string
+}

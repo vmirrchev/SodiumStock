@@ -1,8 +1,12 @@
+<div class="information__container">
+    <div class="info__header">
+        <h3 class="header__title">Chemical Information</h3>
+        <select name="compound-select" id="select" [(ngModel)]="selectedCompound"> 
+            <option [selected]="true" [ngValue]="selectedCompound" disabled>SELECT COMPOUND</option>
+            <option *ngFor="let compound of compounds" [ngValue]="compound">{{ compound.casName }}</option>
+        </select>
+    </div>
 <div class="compound__info">
-    <select name="compound-select" id="select" [(ngModel)]="selectedCompound"> 
-        <option [selected]="true" [ngValue]="selectedCompound" disabled>SELECT COMPOUND</option>
-        <option *ngFor="let compound of compounds" [ngValue]="compound">{{ compound.casName }}</option>
-    </select>
     <div class="info__container" *ngIf="selectedCompound">
         <img class="info__image"
             src="{{ selectedCompound.imageUrl }}"
@@ -42,4 +46,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

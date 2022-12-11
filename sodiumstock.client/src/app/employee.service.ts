@@ -25,7 +25,7 @@ export class EmployeeService {
   createEmployee(employee: Employee): Observable<EmployeeResponse> {
     return this.http.post<EmployeeResponse>(this._createEmployeesUrl, employee, { withCredentials: true, 'headers': this.headers });
   }
-  removeByUsername(id: number): Observable<MessageResponse> {
+  removeById(id: number): Observable<MessageResponse> {
     return this.http.delete<MessageResponse>(this._deleteEmployeeByUsernameUrl + id, { withCredentials: true, 'headers': this.headers });
   }
 }

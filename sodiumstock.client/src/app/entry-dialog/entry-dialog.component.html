@@ -1,0 +1,22 @@
+<div class="dialog__container">
+    <p class="dialog__title">ADD NEW ENTRY</p>
+
+    <form class="dialog__form">
+        <input name="user" type="text" class="form-control" placeholder="{{ getUsername() }}" value="{{ getUsername()}}" disabled >
+        <input name="currentDate" type="date" class="form-control" value="{{ date }}" disabled>
+    </form>
+    <form [formGroup]="form" class="dialog__form" (submit)="submit()">
+
+        <select formControlName="compoundId" name="compound" id="select" class="form-control">
+            <option value="" disabled selected>SELECT COMPOUND</option>
+            <option *ngFor="let compound of compounds" [ngValue]="compound.id">{{ compound.casName }}</option>
+        </select>
+
+        <input formControlName="expirationDate" name="expirationDate" type="date" class="form-control">
+
+        <div class="btn__container">
+            <button [disabled]="form.invalid" class="btn btn-lg btn-primary" type="submit">SUBMIT</button>
+            <button class="btn btn-lg btn-primary" mat-dialog-close>CLOSE</button>
+        </div>
+    </form>
+</div>

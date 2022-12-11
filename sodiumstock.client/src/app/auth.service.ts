@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { LoginCredentials } from './LoginCredentials';
-import { LoginResponse } from './loginResponse';
+import { LoginCredentials, LoginResponse } from './login';
+
 
 @Injectable({
   providedIn: 'root'

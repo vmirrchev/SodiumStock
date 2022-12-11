@@ -6,30 +6,47 @@
 }
 .inventory__container {
     height: 100%;
-    overflow: auto;
-    position: relative;
+    width: 100%;
 }
-.table {
-    position: relative;
+.inventory__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid grey;
+}
+.inventory__header .header__title {
+    font-weight: bold;
+}
+.inventory__table {
+    height: calc(100% - 83px);
+    overflow: auto;
 }
 .table td {
     color: var(--clr-logo-blue);
 }
 .inventory__container .status__expired {
-    color: #F63E02;
+    color: var(--clr-red);
 }
 .inventory__container .status__valid {
-    color: #63AC4A;
+    color: var(--clr-green);
 }
 .inventory__container .status__expiring {
-    color: #E57C04;
+    color: var(--clr-orange);
 }
 .table thead {
     position: sticky;
     top: 0px;
     background-color: var(--clr-main);
 }
-.inventory__container .data__message {
-    position: absolute;
-    top: 0;
+.btn__remove {
+    background: inherit;
+    border: none;
+    color: var(--clr-red);
+}
+.btn__add {
+    background: var(--clr-green);
+    border: none;
+    color: white;
 }

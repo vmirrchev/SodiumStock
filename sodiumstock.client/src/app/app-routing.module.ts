@@ -8,7 +8,6 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'home', component: HomeComponent, canActivate: [HomeGuard]},
-  { path: 'management', component: HomeComponent, canActivate: [HomeGuard]},
   { path: 'statistics', component: HomeComponent, canActivate: [HomeGuard]},
   { path: 'info', component: HomeComponent, canActivate: [HomeGuard]},
   { path: 'employees', component: HomeComponent, canActivate: [HomeGuard]},

@@ -80,6 +80,10 @@ Clicking on Manage Employees redirects to a webpage for employee creation and de
 
 * There will always be 1+ employee, as the backend uses on-start service that will check of admin presence in database and eventually create new one if needed.
 
+Navigating to a webpage, that does not exist will redirect to a custom 404 not found webpage. Clicking on Go to Home Page will redirect to the login page if the user has not yet logged in:
+
+![image](https://user-images.githubusercontent.com/108091226/207128228-860b56ef-e8f7-4181-9985-c3574d1a0ba9.png)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

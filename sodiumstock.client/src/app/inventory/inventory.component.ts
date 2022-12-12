@@ -35,7 +35,7 @@ export class InventoryComponent implements OnInit {
     this.entryService.removeById(id)
       .subscribe({
         next: (message: MessageResponse) => { this.getEntries() },
-        error: (error: any) => { alert("Error deleting employee: " + error.message) }
+        error: (error: any) => { alert("Error deleting entry: " + error.message) }
       })
   }
   openDialog(){

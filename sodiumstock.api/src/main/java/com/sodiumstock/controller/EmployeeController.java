@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = "http://sodiumstock-resources.s3-website.eu-central-1.amazonaws.com/", maxAge = 3600, allowCredentials="true")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")

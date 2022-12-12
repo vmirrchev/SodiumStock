@@ -11,6 +11,7 @@ import { LoginResponse } from '../login';
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
+  noSuchUser: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,7 +36,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('isLoggedIn', 'true');
           this.router.navigate(['/home']);
         },
-        error: (error: any) => alert("There is no user with these credentials. Please try again.")
+        error: (error: any) => {this.noSuchUser = true;
+        this.form.reset()}
       });
   }
 }

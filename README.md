@@ -40,6 +40,17 @@ For the backend use `mvn spring-boot:run` inside the .api folder.
 For the client use `ng-serve` inside the .client folder.
 * API URL should be updated in the environment.ts file.
 
+## Deployment
+
+For the backend there is Dockerfile and CI pipeline in GitHub Actions creating docker image from the .jar file after building the API.
+As last step the docker image is pushed to AWS Elastic container registry and new task is created manually in ECS Fargate Cluster.
+
+The client build comamnd is ``ng build --configuration production`` creating new dist folder. The content of this folder gets copied inside AWS S3 Bucket and hosted as static webpage with public access.
+
+![image](https://user-images.githubusercontent.com/108091226/207162175-7766d7c1-d8ef-45a4-a5cb-2c55ca91931a.png)
+
+![image](https://user-images.githubusercontent.com/108091226/207162677-befc3000-7977-4b83-93b2-c0f50f554271.png)
+
 ## Usage
 After the successful startup of both the API and client, navigate to **http:\\localhost:4200**. The first step is the login page:
 

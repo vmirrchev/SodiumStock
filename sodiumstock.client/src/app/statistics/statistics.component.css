@@ -14,3 +14,8 @@
     width: 400px;
     height: 400px;
 }
+@media only screen and (max-width: 430px) {
+    .statistics__piechart {
+        width: 100%;
+    }
+}

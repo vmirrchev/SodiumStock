@@ -8,9 +8,11 @@
     </div>
 <div class="compound__info">
     <div class="info__container" *ngIf="selectedCompound">
+        <div class="image__container">
         <img class="info__image"
             src="{{ selectedCompound.imageUrl }}"
             alt="selected-compound-image">
+        </div>
         <div class="info__details">
             <div class="details__property">
                 <p class="property__name">CAS-NAME:</p>

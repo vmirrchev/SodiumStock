@@ -39,3 +39,25 @@ header .header__container li  a {
     color: var(--clr-logo-blue);
     font-weight: 600;
 }
+@media only screen and (max-width: 850px) {
+    header {
+        flex-direction: column;
+        gap: 0px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    header li a {
+        font-size: 1.1rem;
+    }
+}
+@media only screen and (max-width: 430px) {
+    header .header__container ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        text-align: center;
+    }
+    header img {
+        width: 100%;
+    }
+}

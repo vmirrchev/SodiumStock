@@ -34,17 +34,30 @@
 }
 .info__image {
     height: 100%;
+    width: 100%;
+    object-fit: cover;
     margin: 0 auto;
 }
 .info__details {
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
+    justify-content: space-between;
 }
 .details__property {
     display: flex;
     gap: 20px;
 }
+.details__property p {
+    margin: 0;
+}
 .property__name {
     color: black;
     font-weight: bold;
+}
+@media only screen and (max-width: 600px) {
+    .info__container {
+        display: flex;
+        flex-direction: column;
+    }
 }

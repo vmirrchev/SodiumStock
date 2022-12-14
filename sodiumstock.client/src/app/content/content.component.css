@@ -1,6 +1,7 @@
 :host {
     width: 75vw;
-    height: calc(100vh - 144px);
+    min-height: calc(100vh - 144px);
+    height: auto;
     display: flex;
     padding: 40px;
 }
@@ -16,3 +17,9 @@ div.main__component {
         width: unset;
     }
 }
+@media only screen and (max-width: 1300px) {
+    :host {
+        padding: 20px;
+    }
+}
+

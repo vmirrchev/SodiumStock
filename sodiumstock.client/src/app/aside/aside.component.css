@@ -53,3 +53,30 @@ aside {
         justify-content: space-evenly;
     }
 }
+@media only screen and (max-width: 850px) {
+    header {
+        flex-direction: column;
+        gap: 0px;
+    }
+    .side__navigation ul {
+        gap: unset;
+    }
+}
+@media only screen and (max-width: 760px) {
+    .side__navigation ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .side__navigation ul {
+        font-size: 1.3rem;
+    }
+}
+@media only screen and (max-width: 430px) {
+    .side__navigation ul {
+        grid-template-columns: 1fr;
+    }
+}

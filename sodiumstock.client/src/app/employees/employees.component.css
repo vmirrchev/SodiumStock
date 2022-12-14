@@ -8,7 +8,7 @@
     height: 100%;
     width: 100%;
 }
-.inventory__header {
+.employees__header {
     display: flex;
     justify-content: space-between;
     align-items: start;
@@ -16,10 +16,10 @@
     padding-bottom: 20px;
     border-bottom: 1px solid grey;
 }
-.inventory__header .header__title {
+.employees__header .header__title {
     font-weight: bold;
 }
-.inventory__table {
+.employees__table {
     height: calc(100% - 83px);
     overflow: auto;
 }

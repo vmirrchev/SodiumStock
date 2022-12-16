@@ -17,11 +17,19 @@ export class InfoComponent implements OnInit {
   }
   getCompounds() {
     this.componentService.getAll()
-    .subscribe({
-      next: res => {
-      this.compounds = res;
-      },
-      error: () => alert("Error fetching compounds")
+      .subscribe({
+        next: res => {
+          this.compounds = res;
+        },
+        error: () => alert("Error fetching compounds")
       })
+  }
+  isNumber(character: any): boolean {
+    debugger;
+    if (character.charCodeAt(0) >= 50 && character.charCodeAt(0) <= 57) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

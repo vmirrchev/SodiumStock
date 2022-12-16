@@ -24,7 +24,16 @@
             </div>
             <div class="details__property">
                 <p class="property__name">MOLECULAR-FORMULA:</p>
-                <p class="property__value">{{ selectedCompound.molecularFormula }}</p>
+                <p class="property__value">
+                    <span *ngFor="let char of selectedCompound.molecularFormula.split('')">
+                        <ng-container *ngIf="isNumber(char); else notNumber">
+                            <sub>{{char}}</sub>
+                        </ng-container>
+                        <ng-template #notNumber>
+                            {{char}}
+                        </ng-template>
+                    </span>
+                </p>
             </div>
             <div class="details__property">
                 <p class="property__name">MOLAR-MASS:</p>

@@ -25,7 +25,6 @@ export class InfoComponent implements OnInit {
       })
   }
   isNumber(character: any): boolean {
-    debugger;
     if (character.charCodeAt(0) >= 50 && character.charCodeAt(0) <= 57) {
       return true;
     } else {

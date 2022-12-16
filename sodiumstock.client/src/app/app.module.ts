@@ -21,6 +21,7 @@ import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EntryDialogComponent } from './entry-dialog/entry-dialog.component';
+import { CompoundComponent } from './compound/compound.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EntryDialogComponent } from './entry-dialog/entry-dialog.component';
     PagenotfoundComponent,
     EmployeesComponent,
     EmployeeDialogComponent,
-    EntryDialogComponent
+    EntryDialogComponent,
+    CompoundComponent
   ],
   imports: [
     BrowserModule,

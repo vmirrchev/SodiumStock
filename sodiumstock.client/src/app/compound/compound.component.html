@@ -1,0 +1,52 @@
+<div class="compound__info">
+    <div class="info__container" *ngIf="compound">
+        <div class="image__container">
+        <img class="info__image"
+            src="{{ compound.imageUrl }}"
+            alt="selected-compound-image">
+        </div>
+        <div class="info__details">
+            <div class="details__property">
+                <p class="property__name">CAS-NAME:</p>
+                <p class="property__value">{{ compound.casName }}</p>
+            </div>
+            <div class="details__property">
+                <p class="property__name">CAS-NUMBER:</p>
+                <p class="property__value">{{ compound.casNumber }}</p>
+            </div>
+            <div class="details__property">
+                <p class="property__name">MOLECULAR-FORMULA:</p>
+                <p class="property__value">
+                    <span *ngFor="let char of compound.molecularFormula.split('')">
+                        <ng-container *ngIf="isNumber(char); else notNumber">
+                            <sub>{{char}}</sub>
+                        </ng-container>
+                        <ng-template #notNumber>
+                            {{char}}
+                        </ng-template>
+                    </span>
+                </p>
+            </div>
+            <div class="details__property">
+                <p class="property__name">MOLAR-MASS:</p>
+                <p class="property__value">{{ compound.molarMass }}</p>
+            </div>
+            <div class="details__property">
+                <p class="property__name">BOILING-POINT:</p>
+                <p class="property__value">{{ compound.boilingPoint }} °C</p>
+            </div>
+            <div class="details__property">
+                <p class="property__name">MELTING-POINT:</p>
+                <p class="property__value">{{ compound.meltingPoint }} °C</p>
+            </div>
+            <div class="details__property">
+                <p class="property__name">DENSITY:</p>
+                <p class="property__value">{{ compound.density }} g/cm3</p>
+            </div>
+            <div class="details__property" *ngFor="let otherName of compound.otherNames">
+                <p class="property__name">OTHER NAME:</p>
+                <p class="property__value">{{ otherName }}</p>
+            </div>
+        </div>
+    </div>
+</div>

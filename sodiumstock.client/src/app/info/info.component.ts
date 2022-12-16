@@ -24,11 +24,4 @@ export class InfoComponent implements OnInit {
         error: () => alert("Error fetching compounds")
       })
   }
-  isNumber(character: any): boolean {
-    if (character.charCodeAt(0) >= 50 && character.charCodeAt(0) <= 57) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }

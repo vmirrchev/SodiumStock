@@ -1,7 +1,6 @@
 :host {
     width: 75vw;
-    min-height: calc(100vh - 144px);
-    height: auto;
+    height: calc(100vh - 144px);
     display: flex;
     padding: 40px;
 }

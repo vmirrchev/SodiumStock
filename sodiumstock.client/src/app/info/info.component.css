@@ -1,8 +1,10 @@
 :host {
     width: 100%;
-    height: 100%;
+    height: 100%;   overflow: auto;
 }
 .information__container {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -17,47 +19,11 @@
 .info__header .header__title {
     font-weight: bold;
 }
-.compound__info {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--clr-white);
-}
 #select {
     padding: 0.3rem;
     font-weight: bold;
 }
-.info__container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    gap: 0;
-    padding: 30px;
-}
-.info__image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    margin: 0 auto;
-}
-.info__details {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-    justify-content: space-between;
-}
-.details__property {
-    display: flex;
-    gap: 20px;
-}
-.details__property p {
-    margin: 0;
-}
-.property__name {
-    color: black;
-    font-weight: bold;
-}
-@media only screen and (max-width: 600px) {
-    .info__container {
-        display: flex;
-        flex-direction: column;
-    }
+.compounds__container {
+    height: calc(100% - 83px);
+    overflow: auto;
 }

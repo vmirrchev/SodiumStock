@@ -1,61 +1,17 @@
 <div class="information__container">
     <div class="info__header">
         <h3 class="header__title">Chemical Information</h3>
-        <select name="compound-select" id="select" [(ngModel)]="selectedCompound"> 
-            <option [selected]="true" [ngValue]="selectedCompound" disabled>SELECT COMPOUND</option>
+        <select name="compound-select" id="select" [(ngModel)]="selectedCompound">
+            <option [ngValue]="undefined" selected>SELECT ALL</option>
             <option *ngFor="let compound of compounds" [ngValue]="compound">{{ compound.casName }}</option>
         </select>
     </div>
-<div class="compound__info">
-    <div class="info__container" *ngIf="selectedCompound">
-        <div class="image__container">
-        <img class="info__image"
-            src="{{ selectedCompound.imageUrl }}"
-            alt="selected-compound-image">
-        </div>
-        <div class="info__details">
-            <div class="details__property">
-                <p class="property__name">CAS-NAME:</p>
-                <p class="property__value">{{ selectedCompound.casName }}</p>
-            </div>
-            <div class="details__property">
-                <p class="property__name">CAS-NUMBER:</p>
-                <p class="property__value">{{ selectedCompound.casNumber }}</p>
-            </div>
-            <div class="details__property">
-                <p class="property__name">MOLECULAR-FORMULA:</p>
-                <p class="property__value">
-                    <span *ngFor="let char of selectedCompound.molecularFormula.split('')">
-                        <ng-container *ngIf="isNumber(char); else notNumber">
-                            <sub>{{char}}</sub>
-                        </ng-container>
-                        <ng-template #notNumber>
-                            {{char}}
-                        </ng-template>
-                    </span>
-                </p>
-            </div>
-            <div class="details__property">
-                <p class="property__name">MOLAR-MASS:</p>
-                <p class="property__value">{{ selectedCompound.molarMass }}</p>
-            </div>
-            <div class="details__property">
-                <p class="property__name">BOILING-POINT:</p>
-                <p class="property__value">{{ selectedCompound.boilingPoint }} °C</p>
-            </div>
-            <div class="details__property">
-                <p class="property__name">MELTING-POINT:</p>
-                <p class="property__value">{{ selectedCompound.meltingPoint }} °C</p>
-            </div>
-            <div class="details__property">
-                <p class="property__name">DENSITY:</p>
-                <p class="property__value">{{ selectedCompound.density }} g/cm3</p>
-            </div>
-            <div class="details__property" *ngFor="let otherName of selectedCompound.otherNames">
-                <p class="property__name">OTHER NAME:</p>
-                <p class="property__value">{{ otherName }}</p>
+    <div class="compounds__container">
+        <div *ngIf="selectedCompound == null; else compound">
+            <div *ngFor="let compound of compounds">
+                <app-compound [compound]="compound"></app-compound>
             </div>
         </div>
+        <ng-template #compound><app-compound [compound]="selectedCompound"></app-compound></ng-template>
     </div>
-</div>
 </div>

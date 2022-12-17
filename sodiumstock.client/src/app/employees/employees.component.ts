@@ -4,6 +4,7 @@ import { EmployeeService } from '../employee.service';
 import { MessageResponse } from '../messageResponse';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-employees',
@@ -12,6 +13,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class EmployeesComponent implements OnInit {
   employees: Employee[] = [];
+  public isFetching: boolean = false;
+  public renderMessage: boolean = false;
+  public renderError: boolean = false;
+  public error?: string;
 
   constructor(
     private employeeService: EmployeeService,
@@ -22,13 +27,22 @@ export class EmployeesComponent implements OnInit {
     this.getEmployees();
   }
   getEmployees(): void {
+    this.isFetching = true;
     this.employeeService.getAll().subscribe({
       next: (data: Employee[]) => {
         if(data.length > 0) {
           this.employees = data;
+        } else {
+          this.renderMessage = true;
         }
+        this.isFetching = false;
       },
-      error: (error: any) => alert("Error fetching data: " + error)
+      error: (error: HttpErrorResponse) => 
+      {
+        this.isFetching = false;
+        this.renderError = true;
+        this.error = error.error.message;
+      }
     })
   }
   removeEmployee(id: number): void {

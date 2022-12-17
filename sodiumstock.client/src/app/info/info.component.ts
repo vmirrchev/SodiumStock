@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Compound } from '../compound';
 import { CompoundService } from '../compound.service';
@@ -10,6 +11,10 @@ import { CompoundService } from '../compound.service';
 export class InfoComponent implements OnInit {
   compounds?: Compound[];
   selectedCompound?: Compound;
+  public isFetching: boolean = false;
+  public renderMessage: boolean = false;
+  public renderError: boolean = false;
+  public error?: string;
 
   constructor(private componentService: CompoundService) { }
 
@@ -17,12 +22,22 @@ export class InfoComponent implements OnInit {
     this.getCompounds();
   }
   getCompounds() {
-    this.componentService.getAll()
-      .subscribe({
-        next: res => {
-          this.compounds = res;
-        },
-        error: () => alert("Error fetching compounds")
-      })
+    this.isFetching = true;
+    this.componentService.getAll().subscribe({
+      next: (data: Compound[]) => {
+        if(data.length > 0) {
+          this.compounds = data;
+        } else {
+          this.renderMessage = true;
+        }
+        this.isFetching = false;
+      },
+      error: (error: HttpErrorResponse) => 
+      {
+        this.isFetching = false;
+        this.renderError = true;
+        this.error = error.error.message;
+      }
+    })
   }
 }

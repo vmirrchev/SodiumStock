@@ -6,7 +6,10 @@
             <option *ngFor="let compound of compounds" [ngValue]="compound">{{ compound.casName }}</option>
         </select>
     </div>
-    <div class="compounds__container">
+    <h3 class="data__message" *ngIf="isFetching && !renderMessage && !renderError">Loading data.....</h3>
+    <h3 class="data__message" *ngIf="!isFetching && renderMessage && !renderError">There are no entries.</h3>
+    <h3 class="data__message" *ngIf="!isFetching && !renderMessage && renderError">{{ error }}</h3>
+    <div class="compounds__container" *ngIf="!isFetching && !renderMessage && !renderError">
         <div *ngIf="selectedCompound == null; else compound">
             <div *ngFor="let compound of compounds">
                 <app-compound [compound]="compound"></app-compound>

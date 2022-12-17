@@ -12,7 +12,7 @@
             <option *ngFor="let compound of compounds" [ngValue]="compound.id">{{ compound.casName }}</option>
         </select>
 
-        <input formControlName="expirationDate" name="expirationDate" type="date" class="form-control">
+        <input formControlName="expirationDate" name="expirationDate" type="date" min="{{ date }}" class="form-control">
 
         <div class="btn__container">
             <button [disabled]="form.invalid" class="btn btn-lg btn-primary" type="submit">SUBMIT</button>

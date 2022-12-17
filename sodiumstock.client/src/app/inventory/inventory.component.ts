@@ -4,6 +4,7 @@ import { Entry } from '../entry';
 import { MessageResponse } from '../messageResponse';
 import { MatDialog } from '@angular/material/dialog';
 import { EntryDialogComponent } from '../entry-dialog/entry-dialog.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-inventory',
@@ -12,7 +13,10 @@ import { EntryDialogComponent } from '../entry-dialog/entry-dialog.component';
 })
 export class InventoryComponent implements OnInit {
   public entries: Entry[] = [];
-  public renderMessage: boolean = true;
+  public isFetching: boolean = false;
+  public renderMessage: boolean = false;
+  public renderError: boolean = false;
+  public error?: string;
 
   constructor(public entryService: EntryService,
     public dialog: MatDialog) { }
@@ -21,14 +25,22 @@ export class InventoryComponent implements OnInit {
     this.getEntries();
   }
   getEntries(): void {
+    this.isFetching = true;
     this.entryService.getAll().subscribe({
       next: (data: Entry[]) => {
         if(data.length > 0) {
           this.entries = data;
-          this.renderMessage = false;
+        } else {
+          this.renderMessage = true;
         }
+        this.isFetching = false;
       },
-      error: (error: any) => alert("Error fetching data: " + error)
+      error: (error: HttpErrorResponse) => 
+      {
+        this.isFetching = false;
+        this.renderError = true;
+        this.error = error.error.message;
+      }
     })
   }
   removeEntry(id: number): void {

@@ -3,38 +3,37 @@
         <h3 class="header__title">Current Stock</h3>
         <button class="btn btn__add" (click)="openDialog()">ADD ENTRY</button>
     </div>
-    <h3 class="data__message" *ngIf="renderMessage; else table">There are no entries.</h3>
-    <ng-template #table>
-        <div class="inventory__table" #table>
-            <table class="table table-striped table-sm">
-                <thead class="table__header">
-                    <tr>
-                        <th scope="col">CAS-NAME</th>
-                        <th scope="col">CAS-NUMBER</th>
-                        <th scope="col">SUBMITTED BY</th>
-                        <th scope="col">EXPIRATION DATE</th>
-                        <th scope="col">STATUS</th>
-                        <th scope="col">ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let entry of entries">
-                        <td>{{ entry.compound.casName }}</td>
-                        <td>{{ entry.compound.casNumber }}</td>
-                        <td>{{ entry.employee.firstName + " " + entry.employee.lastName}}</td>
-                        <td>{{ entry.expirationDate }}</td>
-                        <td *ngIf="entryService.checkStatus(entry.expirationDate) == 'VALID'" class="status__valid">{{
-                            entryService.checkStatus(entry.expirationDate) }}</td>
-                        <td *ngIf="entryService.checkStatus(entry.expirationDate) == 'EXPIRED'" class="status__expired">
-                            {{
-                            entryService.checkStatus(entry.expirationDate) }}</td>
-                        <td *ngIf="entryService.checkStatus(entry.expirationDate) == 'EXPIRING'"
-                            class="status__expiring">{{
-                            entryService.checkStatus(entry.expirationDate) }}</td>
-                        <td><button class="btn__remove" (click)="removeEntry(entry.id)">REMOVE</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </ng-template>
+    <h3 class="data__message" *ngIf="isFetching && !renderMessage && !renderError">Loading data.....</h3>
+    <h3 class="data__message" *ngIf="!isFetching && renderMessage && !renderError">There are no entries.</h3>
+    <h3 class="data__message" *ngIf="!isFetching && !renderMessage && renderError">{{ error }}</h3>
+    <div class="inventory__table" *ngIf="!isFetching && !renderMessage && !renderError">
+        <table class="table table-striped table-sm">
+            <thead class="table__header">
+                <tr>
+                    <th scope="col">CAS-NAME</th>
+                    <th scope="col">CAS-NUMBER</th>
+                    <th scope="col">SUBMITTED BY</th>
+                    <th scope="col">EXPIRATION DATE</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let entry of entries">
+                    <td>{{ entry.compound.casName }}</td>
+                    <td>{{ entry.compound.casNumber }}</td>
+                    <td>{{ entry.employee.firstName + " " + entry.employee.lastName}}</td>
+                    <td>{{ entry.expirationDate }}</td>
+                    <td *ngIf="entryService.checkStatus(entry.expirationDate) == 'VALID'" class="status__valid">{{
+                        entryService.checkStatus(entry.expirationDate) }}</td>
+                    <td *ngIf="entryService.checkStatus(entry.expirationDate) == 'EXPIRED'" class="status__expired">
+                        {{
+                        entryService.checkStatus(entry.expirationDate) }}</td>
+                    <td *ngIf="entryService.checkStatus(entry.expirationDate) == 'EXPIRING'" class="status__expiring">{{
+                        entryService.checkStatus(entry.expirationDate) }}</td>
+                    <td><button class="btn__remove" (click)="removeEntry(entry.id)">REMOVE</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

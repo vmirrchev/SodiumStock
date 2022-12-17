@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { EntryService } from '../entry.service';
@@ -17,8 +17,8 @@ export class EntryDialogComponent {
   form!: FormGroup;
   compounds: Compound[] = [];
   selectedCompound?: Compound;
-  date: string = "";
-  userId: string = "";
+  date: string = this.getDate();
+  userId: string = this.getUserId();
 
   constructor(
     private entryService: EntryService,
@@ -29,8 +29,6 @@ export class EntryDialogComponent {
 
   ngOnInit(): void {
     this.getCompounds();
-    this.date = this.getDate();
-    this.userId = this.getUserId();
     this.form = this.formBuilder.group({
       compoundId: new FormControl('', [Validators.required]),
       expirationDate: new FormControl('', [Validators.required]),

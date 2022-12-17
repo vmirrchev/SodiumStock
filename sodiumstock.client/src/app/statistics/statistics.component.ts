@@ -3,6 +3,7 @@ import { EntryService } from '../entry.service';
 import { Entry } from '../entry';
 import { ChartService } from '../chart.service';
 import { Chart } from 'chart.js';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -12,6 +13,10 @@ import { Chart } from 'chart.js';
 })
 export class StatisticsComponent implements OnInit {
   public entriesChart?: Chart;
+  public isFetching: boolean = false;
+  public renderMessage: boolean = false;
+  public renderError: boolean = false;
+  public error?: string;
 
   constructor(
     private entryService: EntryService,
@@ -19,13 +24,22 @@ export class StatisticsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isFetching = true;
     this.entryService.getAll().subscribe({
       next: (data: Entry[]) => {
-        data.length > 0 ?
-        this.chartService.renderChart(this.chartService.mapStatus(data), this.entriesChart) :
-        this.chartService.renderDummyChart(this.entriesChart);
+        if(data.length > 0) {
+        this.chartService.renderChart(data, this.entriesChart)
+        } else {
+          this.renderMessage = true;
+        }
+        this.isFetching = false;
       },
-      error: (error: any) => alert("Error fetching data: " + error)
+      error: (error: HttpErrorResponse) => 
+      {
+        this.isFetching = false;
+        this.renderError = true;
+        this.error = error.error.message;
+      }
     })
   }
 }

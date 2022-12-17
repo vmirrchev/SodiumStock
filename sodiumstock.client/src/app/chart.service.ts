@@ -31,7 +31,8 @@ export class ChartService {
     map.set('EXPIRED', expiredCompounds);
     return map;
   }
-  renderChart(data: Map<string, number>, chart: any): void {
+  renderChart(repsonse: Entry[], chart: any): void {
+    let data = this.mapStatus(repsonse);
     chart = new Chart("entriesChart",
       {
         type: 'pie',
@@ -55,29 +56,6 @@ export class ChartService {
             hoverOffset: 4
           }]
         }
-      })
-  }
-  renderDummyChart(chart: any): void {
-    chart = new Chart("entriesChart",
-      {
-        type: 'pie',
-        data: {
-          labels: [
-            'NO ENTRIES FOUND'
-          ],
-          datasets: [{
-            label: 'Compounds in stock',
-            data: [
-              1],
-            backgroundColor: [
-              'gray'
-            ],
-            hoverOffset: 4,
-          }]
-        },
-        options: {
-          events: []
-      }
       })
   }
 }

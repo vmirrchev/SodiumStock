@@ -2,6 +2,9 @@
     <div class="statistics__header">
         <h3 class="header__title">Statistics</h3>
     </div>
+    <h3 class="data__message" *ngIf="isFetching && !renderMessage && !renderError">Loading data.....</h3>
+    <h3 class="data__message" *ngIf="!isFetching && renderMessage && !renderError">There are no entries.</h3>
+    <h3 class="data__message" *ngIf="!isFetching && !renderMessage && renderError">{{ error }}</h3>
     <div class="statistics__piechart">
         <canvas id="entriesChart"></canvas>
     </div>

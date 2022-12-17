@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EntryService } from '../entry.service';
 import { Entry } from '../entry';
 import { ChartService } from '../chart.service';
+import { Chart } from 'chart.js';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { ChartService } from '../chart.service';
   styleUrls: ['./statistics.component.css'],
 })
 export class StatisticsComponent implements OnInit {
-  public entriesChart: any;
+  public entriesChart?: Chart;
 
   constructor(
     private entryService: EntryService,

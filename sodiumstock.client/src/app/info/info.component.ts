@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Compound } from '../compound';
 import { CompoundService } from '../compound.service';
 
 @Component({
@@ -7,8 +8,8 @@ import { CompoundService } from '../compound.service';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit {
-  compounds: any;
-  selectedCompound: any;
+  compounds?: Compound[];
+  selectedCompound?: Compound;
 
   constructor(private componentService: CompoundService) { }
 

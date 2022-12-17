@@ -16,7 +16,7 @@ import { Compound } from '../compound';
 export class EntryDialogComponent {
   form!: FormGroup;
   compounds: Compound[] = [];
-  selectedCompound: any;
+  selectedCompound?: Compound;
   date: string = "";
   userId: string = "";
 

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Compound } from '../compound';
 
 @Component({
   selector: 'app-compound',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CompoundComponent implements OnInit {
 
-  @Input() compound: any = null;
+  @Input() compound?: Compound;
 
   ngOnInit(): void {
   }
